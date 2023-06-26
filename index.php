@@ -60,6 +60,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <option value="minecraft:recipe_crafted">Craft d'une recette</option>
                     <option value="minecraft:player_killed_entity">Kill d'une entité</option>
                     <option value="minecraft:bred_animals">Reproduction d'animaux</option>
+                    <option value="minecraft:enchanted_item">Item enchanté</option>
+                    <option value="minecraft:consume_item">Item consommé</option>
+                    <option value="minecraft:villager_trade">Trade avec un villageois</option>
                 </select>
             </div>
             <div class="target" id="target-recipe">
@@ -80,6 +83,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         $entityTypes = getEntityTypes();
                         foreach ($entityTypes as $entityType) {
                             echo "<option value='" . $entityType . "'>" . $entityType . "</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="target" id="target-item">
+                <label for="item">Item</label>
+                <select id="item" name="item">
+                    <?php
+                        $items = getItems();
+                        foreach ($items as $item) {
+                            echo "<option value='" . $item . "'>" . $item . "</option>";
                         }
                     ?>
                 </select>

@@ -32,8 +32,9 @@ if (isset($_POST)) {
     $icon = $_POST["icon"];
     $description = $_POST["description"];
     $trigger = $_POST["trigger"];
-    $entity = $_POST["entity"];
     $recipe = $_POST["recipe"];
+    $entity = $_POST["entity"];
+    $item = $_POST["item"];
     $amount = $_POST["amount"];
     $copyQuestsPath = $_POST["copy-quests-path"] ?? false;
 
@@ -52,16 +53,29 @@ if (isset($_POST)) {
             "conditions" => array()
         );
 
-        if ($trigger == "minecraft:recipe_crafted") {
-            $criterion["conditions"]["recipe"] = $recipe;
-        } else if ($trigger == "minecraft:player_killed_entity") {
-            $criterion["conditions"]["entity"] = array(
-                "type" => "minecraft:" . $entity
-            );
-        } else if ($trigger == "minecraft:bred_animals") {
-            $criterion["conditions"]["child"] = array(
-                "type" => "minecraft:" . $entity
-            );
+        switch ($trigger) {
+            case "minecraft:recipe_crafted":
+                $criterion["conditions"]["recipe"] = $recipe;
+                break;
+            case "minecraft:player_killed_entity":
+                $criterion["conditions"]["entity"] = array(
+                    "type" => "minecraft:" . $entity
+                );
+                break;
+            case "minecraft:bred_animals":
+                $criterion["conditions"]["child"] = array(
+                    "type" => "minecraft:" . $entity
+                );
+                break;
+            case "minecraft:enchanted_item":
+            case "minecraft:consume_item":
+            case "minecraft:villager_trade":
+                $criterion["conditions"]["item"] = array(
+                    "items" => array(
+                        "minecraft:" . $item
+                    )
+                );
+                break;
         }
 
         if ($i > 1) {

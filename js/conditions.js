@@ -23,5 +23,10 @@ function showTargetDiv(value) {
         case "minecraft:bred_animals":
             document.getElementById("target-entity").style.display = "block";
             break;
+        case "minecraft:enchanted_item":
+        case "minecraft:consume_item":
+        case "minecraft:villager_trade":
+            document.getElementById("target-item").style.display = "block";
+            break;
     }
 }
