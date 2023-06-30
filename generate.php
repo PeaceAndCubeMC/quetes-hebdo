@@ -91,7 +91,7 @@ if (isset($_POST)) {
 
     // create advancement file
     $advancementFile = fopen("advancements/" . $advancementFileName . ".json", "w");
-    fwrite($advancementFile, json_encode($advancement, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    fwrite($advancementFile, json_encode($advancement, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     fclose($advancementFile);
 
     if ($copyQuestsPath) {
