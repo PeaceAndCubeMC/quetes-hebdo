@@ -1,6 +1,6 @@
 <?php
 
-include(__DIR__ . "./data_fetcher.php");
+include(__DIR__ . "/data_fetcher.php");
 
 session_start();
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
