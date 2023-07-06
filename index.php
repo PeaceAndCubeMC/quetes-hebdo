@@ -110,6 +110,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <input type="checkbox" id="copy-quests-path" name="copy-quests-path" checked>
                 <label for="copy-quests-path">Copier le fichier dans le dossier des quêtes</label>
             </div>
+            <div>
+                <input type="checkbox" id="replace-existing" name="replace-existing">
+                <label for="replace-existing">Remplacer le fichier de la semaine s'il existe déjà. Sinon, le nom du fichier se terminera par "-2", "-3", etc.</label>
+            </div>
         </fieldset>
 
         <input type="submit" value="Submit">

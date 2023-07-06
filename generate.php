@@ -37,8 +37,21 @@ if (isset($_POST)) {
     $item = $_POST["item"];
     $amount = $_POST["amount"];
     $copyQuestsPath = $_POST["copy-quests-path"] ?? false;
+    $replaceExisting = $_POST["replace-existing"] ?? false;
+
+    $questsPath = $_ENV["QUESTS_PATH"];
+    if (!str_ends_with($questsPath, "/")) {
+        $questsPath .= "/";
+    }
 
     $advancementFileName = $year . "-" . str_pad($week, 2, "0", STR_PAD_LEFT);
+
+    if ($copyQuestsPath && !$replaceExisting) {
+        // count existing quests starting with the same name in the folder
+        $existingQuests = count(glob($questsPath . $advancementFileName . "*"));
+        $advancementFileName .= "-" . ($existingQuests + 1);
+    }
+
     $advancementPath = "peaceandcube:quetes/" . $advancementFileName;
 
     $advancement = $advancementTemplate;
@@ -96,10 +109,6 @@ if (isset($_POST)) {
 
     if ($copyQuestsPath) {
         // copy file to quests path
-        $questsPath = $_ENV["QUESTS_PATH"];
-        if (!str_ends_with($questsPath, "/")) {
-            $questsPath .= "/";
-        }
         copy("advancements/" . $advancementFileName . ".json", $questsPath . $advancementFileName . ".json");
     }
 }
