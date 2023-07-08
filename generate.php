@@ -68,7 +68,7 @@ if (isset($_POST)) {
 
         switch ($trigger) {
             case "minecraft:recipe_crafted":
-                $criterion["conditions"]["recipe"] = $recipe;
+                $criterion["conditions"]["recipe_id"] = $recipe;
                 break;
             case "minecraft:player_killed_entity":
                 $criterion["conditions"]["entity"] = array(
