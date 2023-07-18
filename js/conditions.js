@@ -12,6 +12,7 @@ function hideTargetDivs() {
     for (var i = 0; i < targetDivs.length; i++) {
         targetDivs[i].style.display = "none";
     }
+    document.getElementById("note").innerHTML = "";
 }
 
 function showTargetDiv(value) {
@@ -24,6 +25,9 @@ function showTargetDiv(value) {
             document.getElementById("target-entity").style.display = "block";
             break;
         case "minecraft:enchanted_item":
+            document.getElementById("target-item").style.display = "block";
+            document.getElementById("note").innerHTML = "Note : Il s'agit de l'item après avoir été enchanté.";
+            break;
         case "minecraft:consume_item":
         case "minecraft:villager_trade":
             document.getElementById("target-item").style.display = "block";

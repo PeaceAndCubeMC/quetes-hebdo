@@ -98,6 +98,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     ?>
                 </select>
             </div>
+            <div id="note"></div>
             <div>
                 <label for="amount">Nombre de fois</label>
                 <input type="number" id="amount" name="amount" min="1" value="1" required>
