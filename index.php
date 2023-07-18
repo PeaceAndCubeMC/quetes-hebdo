@@ -75,6 +75,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         }
                     ?>
                 </select>
+                <input type="text" id="filter-recipe" placeholder="Filtre" onkeyup="filterElements('filter-recipe', 'recipe')">
             </div>
             <div class="target" id="target-entity">
                 <label for="entity">Entité</label>
@@ -86,6 +87,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         }
                     ?>
                 </select>
+                <input type="text" id="filter-entity" placeholder="Filtre" onkeyup="filterElements('filter-entity', 'entity')">
             </div>
             <div class="target" id="target-item">
                 <label for="item">Item</label>
@@ -97,6 +99,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         }
                     ?>
                 </select>
+                <input type="text" id="filter-item" placeholder="Filtre" onkeyup="filterElements('filter-item', 'item')">
             </div>
             <div id="note"></div>
             <div>

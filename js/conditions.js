@@ -34,3 +34,25 @@ function showTargetDiv(value) {
             break;
     }
 }
+
+function filterElements(filterId, selectId) {
+    var filter = document.getElementById(filterId).value;
+    var select = document.getElementById(selectId);
+    // hide select options that don't match the filter
+    for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].text.toLowerCase().indexOf(filter.toLowerCase()) == -1) {
+            select.options[i].style.display = "none";
+        } else {
+            select.options[i].style.display = "block";
+        }
+    }
+    // if the selected option is hidden, select the first visible option
+    if (select.selectedIndex != -1 && select.options[select.selectedIndex].style.display == "none") {
+        for (var i = 0; i < select.options.length; i++) {
+            if (select.options[i].style.display == "block") {
+                select.selectedIndex = i;
+                break;
+            }
+        }
+    }
+}
