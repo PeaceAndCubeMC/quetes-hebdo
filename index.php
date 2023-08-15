@@ -117,7 +117,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </div>
             <div>
                 <input type="checkbox" id="replace-existing" name="replace-existing">
-                <label for="replace-existing">Remplacer le fichier de la semaine s'il existe déjà. Sinon, le nom du fichier se terminera par "-2", "-3", etc.</label>
+                <label for="replace-existing">Remplacer le fichier de la semaine s'il existe déjà. Sinon, le nom du fichier se terminera par "-1", "-2", etc.</label>
             </div>
         </fieldset>
 

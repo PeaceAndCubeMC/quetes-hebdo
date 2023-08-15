@@ -156,6 +156,7 @@ function addPlayerAdvancementCheck($advancementPath, $index) {
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <script>
         function downloadFile() {
@@ -173,5 +174,6 @@ function addPlayerAdvancementCheck($advancementPath, $index) {
 
     <body>
         <button onclick="downloadFile()">Télécharger le fichier</button>
+        <button onclick="window.location.href = 'index.php'">Retour</button>
     </body>
 </html>
