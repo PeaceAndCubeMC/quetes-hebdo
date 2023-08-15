@@ -56,3 +56,17 @@ function filterElements(filterId, selectId) {
         }
     }
 }
+
+function updateIconSelect(selectId) {
+    var select = document.getElementById(selectId);
+    var value = select.options[select.selectedIndex].value;
+    if (value) {
+        var iconSelect = document.getElementById("icon");
+        for (var i = 0; i < iconSelect.options.length; i++) {
+            if (iconSelect.options[i].value == value) {
+                iconSelect.selectedIndex = i;
+                break;
+            }
+        }
+    }
+}

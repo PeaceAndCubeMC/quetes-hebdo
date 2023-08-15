@@ -45,6 +45,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         }
                     ?>
                 </select>
+                <input type="text" id="filter-icon" placeholder="Filtre" onkeyup="filterElements('filter-icon', 'icon')">
             </div>
             <div>
                 <label for="description">Description</label>
@@ -67,7 +68,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </div>
             <div class="target" id="target-recipe">
                 <label for="recipe">Recette</label>
-                <select id="recipe" name="recipe">
+                <select id="recipe" name="recipe" onchange="updateIconSelect('recipe')">
                     <?php
                         $recipes = getRecipes();
                         foreach ($recipes as $recipe) {
@@ -91,7 +92,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </div>
             <div class="target" id="target-item">
                 <label for="item">Item</label>
-                <select id="item" name="item">
+                <select id="item" name="item" onchange="updateIconSelect('item')">
                     <?php
                         $items = getItems();
                         foreach ($items as $item) {
