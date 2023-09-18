@@ -25,7 +25,12 @@ function getQuests() {
     $result = $pdo->query("SELECT * FROM quests");
 
     while ($row = $result->fetch(PDO::FETCH_NUM)) {
-        // todo: echo
+        echo "<tr>
+            <td>$row[2]</td>
+            <td>$row[3]</td>
+            <td>$row[4]</td>
+            <td>$row[5]</td>
+        </tr>";
     }
 }
 

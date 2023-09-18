@@ -1,6 +1,7 @@
 <?php
 
 include(__DIR__ . "/data_fetcher.php");
+include(__DIR__ . "/db.php");
 
 session_start();
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -123,6 +124,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         <input type="submit" value="Submit">
     </form>
+
+    <h2>Liste des quêtes précédentes</h2>
+    <table>
+        <thead>
+            <th>Nom</th>
+            <th>Type de condition</th>
+            <th>Valeur</th>
+            <th>Nombre de fois</th>
+        </thead>
+        <?php getQuests() ?>
+    </table>
 
 </body>
 </html>
