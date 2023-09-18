@@ -2,3 +2,4 @@
 vendor/
 advancements/
 .env
+*.sqlite
