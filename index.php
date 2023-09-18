@@ -112,8 +112,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <fieldset>
             <legend>Options avancées</legend>
             <div>
-                <input type="checkbox" id="copy-quests-path" name="copy-quests-path" checked>
-                <label for="copy-quests-path">Copier le fichier dans le dossier des quêtes</label>
+                <input type="checkbox" id="save-quest" name="save-quest" checked>
+                <label for="save-quest">Enregistrer la quête. Le fichier sera copié dans le dossier des quêtes, et la quête sera ajoutée dans la base de données.</label>
             </div>
             <div>
                 <input type="checkbox" id="replace-existing" name="replace-existing">

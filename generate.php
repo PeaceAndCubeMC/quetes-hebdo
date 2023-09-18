@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . "/vendor/autoload.php";
+include(__DIR__ . "/db.php");
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -36,7 +37,7 @@ if (isset($_POST)) {
     $entity = $_POST["entity"];
     $item = $_POST["item"];
     $amount = $_POST["amount"];
-    $copyQuestsPath = $_POST["copy-quests-path"] ?? false;
+    $saveQuest = $_POST["save-quest"] ?? false;
     $replaceExisting = $_POST["replace-existing"] ?? false;
 
     $questsPath = $_ENV["QUESTS_PATH"];
@@ -46,7 +47,7 @@ if (isset($_POST)) {
 
     $advancementFileName = $year . "-" . str_pad($week, 2, "0", STR_PAD_LEFT);
 
-    if ($copyQuestsPath && !$replaceExisting) {
+    if ($saveQuest && !$replaceExisting) {
         // count existing quests starting with the same name in the folder
         $existingQuests = count(glob($questsPath . $advancementFileName . "*"));
         $advancementFileName .= "-" . ($existingQuests + 1);
@@ -60,6 +61,21 @@ if (isset($_POST)) {
     $advancement["display"]["title"] = getAdvancementTitle($week, $year);
     $advancement["display"]["description"] = $description;
 
+    switch ($trigger) {
+        case "minecraft:recipe_crafted":
+            $value = $recipe;
+            break;
+        case "minecraft:player_killed_entity":
+        case "minecraft:bred_animals":
+            $value = $entity;
+            break;
+        case "minecraft:enchanted_item":
+        case "minecraft:consume_item":
+        case "minecraft:villager_trade":
+            $value = $item;
+            break;
+    }
+
     for ($i = $amount; $i > 0; $i--) {
         $criterion = array(
             "trigger" => $trigger,
@@ -68,16 +84,16 @@ if (isset($_POST)) {
 
         switch ($trigger) {
             case "minecraft:recipe_crafted":
-                $criterion["conditions"]["recipe_id"] = $recipe;
+                $criterion["conditions"]["recipe_id"] = $value;
                 break;
             case "minecraft:player_killed_entity":
                 $criterion["conditions"]["entity"] = array(
-                    "type" => "minecraft:" . $entity
+                    "type" => "minecraft:" . $value
                 );
                 break;
             case "minecraft:bred_animals":
                 $criterion["conditions"]["child"] = array(
-                    "type" => "minecraft:" . $entity
+                    "type" => "minecraft:" . $value
                 );
                 break;
             case "minecraft:enchanted_item":
@@ -85,7 +101,7 @@ if (isset($_POST)) {
             case "minecraft:villager_trade":
                 $criterion["conditions"]["item"] = array(
                     "items" => array(
-                        "minecraft:" . $item
+                        "minecraft:" . $value
                     )
                 );
                 break;
@@ -107,9 +123,11 @@ if (isset($_POST)) {
     fwrite($advancementFile, json_encode($advancement, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     fclose($advancementFile);
 
-    if ($copyQuestsPath) {
+    if ($saveQuest) {
         // copy file to quests path
         copy("advancements/" . $advancementFileName . ".json", $questsPath . $advancementFileName . ".json");
+        // save to sqlite
+        addQuest($advancementFileName, $trigger, $value, $amount);
     }
 }
 
