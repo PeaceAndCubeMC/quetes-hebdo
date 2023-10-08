@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function() {
         hideTargetDivs();
         showTargetDiv(this.value);
     });
+
+    let table = new DataTable('#previousQuests', {
+        paging: false
+    });
 });
 
 function hideTargetDivs() {

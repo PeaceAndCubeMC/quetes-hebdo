@@ -17,6 +17,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <meta charset="UTF-8">
     <link rel="icon" type="image/ico" href="./favicon.ico" />
     <link rel="stylesheet" href="styles.css" />
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.6/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.6/datatables.min.js"></script>
     <script src="js/conditions.js"></script>
     <title>Quêtes hebdo - PeaceAndCube</title>
 </head>
@@ -126,14 +128,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </form>
 
     <h2>Liste des quêtes précédentes</h2>
-    <table>
+    <table id="previousQuests">
         <thead>
             <th>Nom</th>
             <th>Type de condition</th>
             <th>Valeur</th>
             <th>Nombre de fois</th>
         </thead>
-        <?php getQuests() ?>
+        <tbody>
+            <?php getQuests() ?>
+        </tbody>
     </table>
 
 </body>
