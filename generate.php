@@ -121,7 +121,11 @@ if (isset($_POST)) {
         }
 
         if ($i > 1) {
-            $criterion["conditions"]["player"] += addPlayerAdvancementCheck($advancementPath, $i - 1);
+            if (array_key_exists("player", $criterion["conditions"])) {
+                $criterion["conditions"]["player"] += addPlayerAdvancementCheck($advancementPath, $i - 1);
+            } else {
+                $criterion["conditions"]["player"] = addPlayerAdvancementCheck($advancementPath, $i - 1);
+            }
         }
 
         $advancement["criteria"][$i] = $criterion;
