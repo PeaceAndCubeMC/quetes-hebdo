@@ -64,9 +64,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <option value="minecraft:recipe_crafted">Craft d'une recette</option>
                     <option value="minecraft:player_killed_entity">Kill d'une entité</option>
                     <option value="minecraft:bred_animals">Reproduction d'animaux</option>
+                    <option value="minecraft:tame_animal">Animal apprivoisé</option>
                     <option value="minecraft:enchanted_item">Item enchanté</option>
                     <option value="minecraft:consume_item">Item consommé</option>
                     <option value="minecraft:villager_trade">Trade avec un villageois</option>
+                    <option value="minecraft:voluntary_exile">Déclenchement d'un raid</option>
                 </select>
             </div>
             <div class="target" id="target-recipe">
@@ -105,6 +107,20 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 </select>
                 <input type="text" id="filter-item" placeholder="Filtre" onkeyup="filterElements('filter-item', 'item')">
             </div>
+
+            <div class="target" id="target-biome">
+                <label for="biome">Biome</label>
+                <select id="biome" name="biome">
+                    <?php
+                        $biomes = getBiomes();
+                        foreach ($biomes as $biome) {
+                            echo "<option value='" . $biome . "'>" . $biome . "</option>";
+                        }
+                    ?>
+                </select>
+                <input type="text" id="filter-biome" placeholder="Filtre" onkeyup="filterElements('filter-biome', 'biome')">
+            </div>
+
             <div id="note"></div>
             <div>
                 <label for="amount">Nombre de fois</label>

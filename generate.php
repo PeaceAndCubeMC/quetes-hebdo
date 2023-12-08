@@ -36,6 +36,7 @@ if (isset($_POST)) {
     $recipe = $_POST["recipe"];
     $entity = $_POST["entity"];
     $item = $_POST["item"];
+    $biome = $_POST["biome"];
     $amount = $_POST["amount"];
     $saveQuest = $_POST["save-quest"] ?? false;
     $replaceExisting = $_POST["replace-existing"] ?? false;
@@ -67,12 +68,16 @@ if (isset($_POST)) {
             break;
         case "minecraft:player_killed_entity":
         case "minecraft:bred_animals":
+        case "minecraft:tame_animal":
             $value = $entity;
             break;
         case "minecraft:enchanted_item":
         case "minecraft:consume_item":
         case "minecraft:villager_trade":
             $value = $item;
+            break;
+        case "minecraft:voluntary_exile":
+            $value = $biome;
             break;
     }
 
@@ -87,6 +92,7 @@ if (isset($_POST)) {
                 $criterion["conditions"]["recipe_id"] = $value;
                 break;
             case "minecraft:player_killed_entity":
+            case "minecraft:tame_animal":
                 $criterion["conditions"]["entity"] = array(
                     "type" => "minecraft:" . $value
                 );
@@ -105,10 +111,17 @@ if (isset($_POST)) {
                     )
                 );
                 break;
+            case "minecraft:voluntary_exile":
+                $criterion["conditions"]["player"] = array(
+                    "location" => array(
+                        "biome" => "minecraft:" . $value
+                    )
+                );
+                break;
         }
 
         if ($i > 1) {
-            $criterion["conditions"]["player"] = addPlayerAdvancementCheck($advancementPath, $i - 1);
+            $criterion["conditions"]["player"] += addPlayerAdvancementCheck($advancementPath, $i - 1);
         }
 
         $advancement["criteria"][$i] = $criterion;

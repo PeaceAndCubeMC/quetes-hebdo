@@ -26,6 +26,7 @@ function showTargetDiv(value) {
             break;
         case "minecraft:player_killed_entity":
         case "minecraft:bred_animals":
+        case "minecraft:tame_animal":
             document.getElementById("target-entity").style.display = "block";
             break;
         case "minecraft:enchanted_item":
@@ -35,6 +36,9 @@ function showTargetDiv(value) {
         case "minecraft:consume_item":
         case "minecraft:villager_trade":
             document.getElementById("target-item").style.display = "block";
+            break;
+        case "minecraft:voluntary_exile":
+            document.getElementById("target-biome").style.display = "block";
             break;
     }
 }

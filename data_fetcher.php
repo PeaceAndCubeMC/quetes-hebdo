@@ -19,4 +19,8 @@ function getRecipes() {
     return getData("recipe");
 }
 
+function getBiomes() {
+    return getData("worldgen/biome");
+}
+
 ?>
