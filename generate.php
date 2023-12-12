@@ -112,17 +112,23 @@ if (isset($_POST)) {
                 );
                 break;
             case "minecraft:voluntary_exile":
-                $criterion["conditions"]["player"] = array(
-                    "location" => array(
-                        "biome" => "minecraft:" . $value
+                $criterion["conditions"]["player"] = [
+                    array(
+                        "condition" => "minecraft:entity_properties",
+                        "entity" => "this",
+                        "predicate" => array(
+                            "location" => array(
+                                "biome" => "minecraft:" . $value
+                            )
+                        )
                     )
-                );
+                ];
                 break;
         }
 
         if ($i > 1) {
             if (array_key_exists("player", $criterion["conditions"])) {
-                $criterion["conditions"]["player"] += addPlayerAdvancementCheck($advancementPath, $i - 1);
+                $criterion["conditions"]["player"][0]["predicate"] += addPlayerAdvancementCheck($advancementPath, $i - 1);
             } else {
                 $criterion["conditions"]["player"] = addPlayerAdvancementCheck($advancementPath, $i - 1);
             }
