@@ -15,7 +15,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 $advancementTemplate = array(
     "display" => array(
         "icon" => array(
-            "item" => ""
+            "id" => ""
         ),
         "title" => "",
         "description" => ""
