@@ -58,7 +58,7 @@ if (isset($_POST)) {
 
     $advancement = $advancementTemplate;
 
-    $advancement["display"]["icon"]["item"] = "minecraft:" . $icon;
+    $advancement["display"]["icon"]["id"] = "minecraft:" . $icon;
     $advancement["display"]["title"] = getAdvancementTitle($week, $year);
     $advancement["display"]["description"] = $description;
 
