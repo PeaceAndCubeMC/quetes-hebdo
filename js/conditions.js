@@ -80,3 +80,9 @@ function updateIconSelect(selectId) {
         }
     }
 }
+
+function chooseRandomly(selectId) {
+    var select = document.getElementById(selectId);
+    var item = select.options[Math.floor(Math.random() * select.options.length)];
+    select.value = item.value;
+}

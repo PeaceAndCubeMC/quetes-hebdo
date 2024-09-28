@@ -82,6 +82,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     ?>
                 </select>
                 <input type="text" id="filter-recipe" placeholder="Filtre" onkeyup="filterElements('filter-recipe', 'recipe')">
+                <button id="random" type="button" onclick="chooseRandomly('recipe')">Choisir aléatoirement</button>
             </div>
             <div class="target" id="target-entity">
                 <label for="entity">Entité</label>
@@ -94,6 +95,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     ?>
                 </select>
                 <input type="text" id="filter-entity" placeholder="Filtre" onkeyup="filterElements('filter-entity', 'entity')">
+                <button id="random" type="button" onclick="chooseRandomly('entity')">Choisir aléatoirement</button>
             </div>
             <div class="target" id="target-item">
                 <label for="item">Item</label>
@@ -106,6 +108,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     ?>
                 </select>
                 <input type="text" id="filter-item" placeholder="Filtre" onkeyup="filterElements('filter-item', 'item')">
+                <button id="random" type="button" onclick="chooseRandomly('item')">Choisir aléatoirement</button>
             </div>
 
             <div class="target" id="target-biome">
@@ -119,6 +122,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     ?>
                 </select>
                 <input type="text" id="filter-biome" placeholder="Filtre" onkeyup="filterElements('filter-biome', 'biome')">
+                <button id="random" type="button" onclick="chooseRandomly('biome')">Choisir aléatoirement</button>
             </div>
 
             <div id="note"></div>
