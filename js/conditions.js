@@ -1,13 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
     hideTargetDivs();
     showTargetDiv(document.getElementById("trigger").value);
+
     document.getElementById("trigger").addEventListener("change", function() {
         hideTargetDivs();
         showTargetDiv(this.value);
     });
 
     let table = new DataTable('#previousQuests', {
-        paging: false
+        paging: false,
+        order: [[0, 'desc']]
     });
 });
 
