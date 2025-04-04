@@ -26,8 +26,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <body>
     <h1>Quêtes hebdo</h1>
 
-    <button type="button" onclick="synchronizeQuests()">Lancer le script de synchronisation des quêtes</button>
-
     <h2>Créer une quête</h2>
     <form action="generate.php" method="post">
 
@@ -136,6 +134,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         </fieldset>
 
         <input type="submit" value="Créer la quête">
+
+        <button type="button" onclick="synchronizeQuests()">Lancer le script de synchronisation des quêtes</button>
     </form>
 
     <h2>Liste des quêtes précédentes</h2>
