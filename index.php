@@ -20,10 +20,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.6/datatables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.6/datatables.min.js"></script>
     <script src="js/conditions.js"></script>
+    <script src="js/api_functions.js"></script>
     <title>Quêtes hebdo - PeaceAndCube</title>
 </head>
 <body>
     <h1>Quêtes hebdo</h1>
+
+    <button type="button" onclick="synchronizeQuests()">Lancer le script de synchronisation des quêtes</button>
 
     <h2>Créer une quête</h2>
     <form action="generate.php" method="post">
@@ -132,7 +135,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </div>
         </fieldset>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Créer la quête">
     </form>
 
     <h2>Liste des quêtes précédentes</h2>
