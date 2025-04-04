@@ -38,8 +38,6 @@ if (isset($_POST)) {
     $item = $_POST["item"];
     $biome = $_POST["biome"];
     $amount = $_POST["amount"];
-    $saveQuest = $_POST["save-quest"] ?? false;
-    $replaceExisting = $_POST["replace-existing"] ?? false;
 
     $questsPath = $_ENV["QUESTS_PATH"];
     if (!str_ends_with($questsPath, "/")) {
@@ -48,11 +46,9 @@ if (isset($_POST)) {
 
     $advancementFileName = $year . "-" . str_pad($week, 2, "0", STR_PAD_LEFT);
 
-    if ($saveQuest && !$replaceExisting) {
-        // count existing quests starting with the same name in the folder
-        $existingQuests = count(glob($questsPath . $advancementFileName . "*"));
-        $advancementFileName .= "-" . ($existingQuests + 1);
-    }
+    // count existing quests starting with the same name in the folder
+    $existingQuests = count(glob($questsPath . $advancementFileName . "*"));
+    $advancementFileName .= "-" . ($existingQuests + 1);
 
     $advancementPath = "peaceandcube:quetes/" . $advancementFileName;
 
@@ -146,12 +142,10 @@ if (isset($_POST)) {
     fwrite($advancementFile, json_encode($advancement, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     fclose($advancementFile);
 
-    if ($saveQuest) {
-        // copy file to quests path
-        copy("advancements/" . $advancementFileName . ".json", $questsPath . $advancementFileName . ".json");
-        // save to sqlite
-        addQuest($advancementFileName, $trigger, $value, $amount);
-    }
+    // copy file to quests path
+    copy("advancements/" . $advancementFileName . ".json", $questsPath . $advancementFileName . ".json");
+    // save to sqlite
+    addQuest($advancementFileName, $trigger, $value, $amount);
 }
 
 function getAdvancementTitle($week, $year) {

@@ -132,18 +132,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </div>
         </fieldset>
 
-        <fieldset>
-            <legend>Options avancées</legend>
-            <div>
-                <input type="checkbox" id="save-quest" name="save-quest" checked>
-                <label for="save-quest">Enregistrer la quête. Le fichier sera copié dans le dossier des quêtes, et la quête sera ajoutée dans la base de données.</label>
-            </div>
-            <div>
-                <input type="checkbox" id="replace-existing" name="replace-existing">
-                <label for="replace-existing">Remplacer le fichier de la semaine s'il existe déjà. Sinon, le nom du fichier se terminera par "-1", "-2", etc.</label>
-            </div>
-        </fieldset>
-
         <input type="submit" value="Submit">
     </form>
 
