@@ -24,7 +24,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <title>Quêtes hebdo - PeaceAndCube</title>
 </head>
 <body>
-    <h1>Quêtes hebdo</h1>
+    <!-- QUESTS -->
+    <div class="header">
+        <h1 id="quests">Quêtes hebdo</h1>
+        <button onclick="window.location.href = '#bingo'">Configurer le serveur Bingo</button>
+    </div>
 
     <h2>Créer une quête</h2>
     <form action="generate.php" method="post">
@@ -151,5 +155,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         </tbody>
     </table>
 
+    <!-- BINGO -->
+    <h1 id="bingo">Serveur Bingo</h1>
+
+    <button type="button" onclick="startBingoServer()">Réinitialiser la carte et lancer le serveur</button>
+    <button type="button" onclick="stopBingoServer()">Arrêter le serveur</button>
 </body>
 </html>
