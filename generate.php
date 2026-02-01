@@ -12,6 +12,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
+$rewardFunction = "peaceandcube:quetes/ticket";
 $advancementTemplate = array(
     "display" => array(
         "icon" => array(
@@ -23,7 +24,7 @@ $advancementTemplate = array(
     "parent" => "peaceandcube:quetes/root",
     "criteria" => array(),
     "rewards" => array(
-        "function" => "peaceandcube:quetes/ticket"
+        "function" => $rewardFunction
     )
 );
 
@@ -34,6 +35,7 @@ if (isset($_POST)) {
     $description = $_POST["description"];
     $trigger = $_POST["trigger"];
     $recipe = $_POST["recipe"];
+    $potion = $_POST["potion"];
     $entity = $_POST["entity"];
     $item = $_POST["item"];
     $biome = $_POST["biome"];
@@ -60,7 +62,11 @@ if (isset($_POST)) {
 
     switch ($trigger) {
         case "minecraft:recipe_crafted":
+        case "minecraft:crafter_recipe_crafted":
             $value = $recipe;
+            break;
+        case "minecraft:brewed_potion":
+            $value = $potion;
             break;
         case "minecraft:player_killed_entity":
         case "minecraft:bred_animals":
@@ -85,7 +91,11 @@ if (isset($_POST)) {
 
         switch ($trigger) {
             case "minecraft:recipe_crafted":
+            case "minecraft:crafter_recipe_crafted":
                 $criterion["conditions"]["recipe_id"] = $value;
+                break;
+            case "minecraft:brewed_potion":
+                $criterion["conditions"]["potion"] = $value;
                 break;
             case "minecraft:player_killed_entity":
             case "minecraft:tame_animal":

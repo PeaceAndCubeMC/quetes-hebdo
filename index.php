@@ -67,6 +67,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <label for="trigger">Type de condition</label>
                 <select id="trigger" name="trigger">
                     <option value="minecraft:recipe_crafted">Craft d'une recette</option>
+                    <option value="minecraft:crafter_recipe_crafted">Craft d'une recette dans un fabricateur</option>
+                    <option value="minecraft:brewed_potion">Craft d'une potion</option>
                     <option value="minecraft:player_killed_entity">Kill d'une entité</option>
                     <option value="minecraft:bred_animals">Reproduction d'animaux</option>
                     <option value="minecraft:tame_animal">Animal apprivoisé</option>
@@ -88,6 +90,19 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 </select>
                 <input type="text" id="filter-recipe" placeholder="Filtre" onkeyup="filterElements('filter-recipe', 'recipe')">
                 <button id="random" type="button" onclick="chooseRandomly('recipe')">Choisir aléatoirement</button>
+            </div>
+            <div class="target" id="target-potion">
+                <label for="potion">Potion</label>
+                <select id="potion" name="potion">
+                    <?php
+                        $potions = getPotions();
+                        foreach ($potions as $potion) {
+                            echo "<option value='" . $potion . "'>" . $potion . "</option>";
+                        }
+                    ?>
+                </select>
+                <input type="text" id="filter-potion" placeholder="Filtre" onkeyup="filterElements('filter-potion', 'potion')">
+                <button id="random" type="button" onclick="chooseRandomly('potion')">Choisir aléatoirement</button>
             </div>
             <div class="target" id="target-entity">
                 <label for="entity">Entité</label>

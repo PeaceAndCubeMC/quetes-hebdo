@@ -23,4 +23,8 @@ function getBiomes() {
     return getData("worldgen/biome");
 }
 
+function getPotions() {
+    return getData("potion");
+}
+
 ?>

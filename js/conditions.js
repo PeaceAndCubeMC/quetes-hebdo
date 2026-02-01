@@ -24,7 +24,11 @@ function hideTargetDivs() {
 function showTargetDiv(value) {
     switch (value) {
         case "minecraft:recipe_crafted":
+        case "minecraft:crafter_recipe_crafted":
             document.getElementById("target-recipe").style.display = "block";
+            break;
+        case "minecraft:brewed_potion":
+            document.getElementById("target-potion").style.display = "block";
             break;
         case "minecraft:player_killed_entity":
         case "minecraft:bred_animals":
