@@ -100,12 +100,12 @@ if (isset($_POST)) {
             case "minecraft:player_killed_entity":
             case "minecraft:tame_animal":
                 $criterion["conditions"]["entity"] = array(
-                    "type" => "minecraft:" . $value
+                    "entity_type" => "minecraft:" . $value
                 );
                 break;
             case "minecraft:bred_animals":
                 $criterion["conditions"]["child"] = array(
-                    "type" => "minecraft:" . $value
+                    "entity_type" => "minecraft:" . $value
                 );
                 break;
             case "minecraft:enchanted_item":
@@ -188,8 +188,7 @@ function translateMonthToFrench($month) {
 
 function addPlayerAdvancementCheck($advancementPath, $index) {
     return array(
-        "type_specific" => array(
-            "type" => "player",
+        "type_specific/player" => array(
             "advancements" => array(
                 $advancementPath => array(
                     $index => true
