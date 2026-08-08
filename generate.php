@@ -2,6 +2,7 @@
 
 require __DIR__ . "/vendor/autoload.php";
 include(__DIR__ . "/db.php");
+include(__DIR__ . "/src/enums/AdvancementTrigger.php");
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -11,6 +12,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("Location: login.php");
     exit;
 }
+
+const MINECRAFT_PREFIX = "minecraft:";
 
 $rewardFunction = "peaceandcube:quetes/ticket";
 $advancementTemplate = array(
@@ -56,29 +59,29 @@ if (isset($_POST)) {
 
     $advancement = $advancementTemplate;
 
-    $advancement["display"]["icon"]["id"] = "minecraft:" . $icon;
+    $advancement["display"]["icon"]["id"] = MINECRAFT_PREFIX . $icon;
     $advancement["display"]["title"] = getAdvancementTitle($week, $year);
     $advancement["display"]["description"] = $description;
 
     switch ($trigger) {
-        case "minecraft:recipe_crafted":
-        case "minecraft:crafter_recipe_crafted":
+        case AdvancementTrigger::RECIPE_CRAFTED:
+        case AdvancementTrigger::CRAFTER_RECIPE_CRAFTED:
             $value = $recipe;
             break;
-        case "minecraft:brewed_potion":
+        case AdvancementTrigger::BREWED_POTION:
             $value = $potion;
             break;
-        case "minecraft:player_killed_entity":
-        case "minecraft:bred_animals":
-        case "minecraft:tame_animal":
+        case AdvancementTrigger::PLAYER_KILLED_ENTITY:
+        case AdvancementTrigger::BRED_ANIMALS:
+        case AdvancementTrigger::TAME_ANIMAL:
             $value = $entity;
             break;
-        case "minecraft:enchanted_item":
-        case "minecraft:consume_item":
-        case "minecraft:villager_trade":
+        case AdvancementTrigger::ENCHANTED_ITEM:
+        case AdvancementTrigger::CONSUME_ITEM:
+        case AdvancementTrigger::VILLAGER_TRADE:
             $value = $item;
             break;
-        case "minecraft:voluntary_exile":
+        case AdvancementTrigger::VOLUNTARY_EXILE:
             $value = $biome;
             break;
     }
@@ -90,34 +93,34 @@ if (isset($_POST)) {
         );
 
         switch ($trigger) {
-            case "minecraft:recipe_crafted":
-            case "minecraft:crafter_recipe_crafted":
+            case AdvancementTrigger::RECIPE_CRAFTED:
+            case AdvancementTrigger::CRAFTER_RECIPE_CRAFTED:
                 $criterion["conditions"]["recipe_id"] = $value;
                 break;
-            case "minecraft:brewed_potion":
+            case AdvancementTrigger::BREWED_POTION:
                 $criterion["conditions"]["potion"] = $value;
                 break;
-            case "minecraft:player_killed_entity":
-            case "minecraft:tame_animal":
+            case AdvancementTrigger::PLAYER_KILLED_ENTITY:
+            case AdvancementTrigger::TAME_ANIMAL:
                 $criterion["conditions"]["entity"] = array(
                     "entity_type" => withMinecraftPrefix($value)
                 );
                 break;
-            case "minecraft:bred_animals":
+            case AdvancementTrigger::BRED_ANIMALS:
                 $criterion["conditions"]["child"] = array(
                     "entity_type" => withMinecraftPrefix($value)
                 );
                 break;
-            case "minecraft:enchanted_item":
-            case "minecraft:consume_item":
-            case "minecraft:villager_trade":
+            case AdvancementTrigger::ENCHANTED_ITEM:
+            case AdvancementTrigger::CONSUME_ITEM:
+            case AdvancementTrigger::VILLAGER_TRADE:
                 $criterion["conditions"]["item"] = array(
                     "items" => isTag($value)
                         ? withMinecraftPrefix($value)
                         : array(withMinecraftPrefix($value))
                 );
                 break;
-            case "minecraft:voluntary_exile":
+            case AdvancementTrigger::VOLUNTARY_EXILE:
                 $criterion["conditions"]["player"] = [
                     array(
                         "condition" => "minecraft:entity_properties",
@@ -168,9 +171,9 @@ function isTag(string $value): bool
 function withMinecraftPrefix(string $value): string
 {
     if (isTag($value)) {
-        return "#minecraft:" . substr($value, 1);
+        return "#" . MINECRAFT_PREFIX . substr($value, 1);
     }
-    return "minecraft:" . $value;
+    return MINECRAFT_PREFIX . $value;
 }
 
 function getAdvancementTitle($week, $year): string

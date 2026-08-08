@@ -34,5 +34,3 @@ function sendResponse($code, $reason = null) {
     header(trim("HTTP/1.1 $code $reason"));
     exit();
 }
-
-?>

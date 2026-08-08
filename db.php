@@ -20,7 +20,8 @@ function openDb() {
     return $pdo;
 }
 
-function getQuests() {
+function getQuests(): void
+{
     $pdo = openDb();
     $result = $pdo->query("SELECT * FROM quests");
 
@@ -36,7 +37,8 @@ function getQuests() {
     }
 }
 
-function addQuest(string $name, string $trigger, string $value, int $amount) {
+function addQuest(string $name, string $trigger, string $value, int $amount): void
+{
     $pdo = openDb();
     $request = $pdo->prepare("INSERT INTO quests (created, name, trigger, value, amount) VALUES (DATETIME('NOW'), :name, :trigger, :value, :amount)");
     $request->bindValue(":name", $name);
@@ -45,5 +47,3 @@ function addQuest(string $name, string $trigger, string $value, int $amount) {
     $request->bindValue(":amount", $amount);
     $request->execute();
 }
-
-?>
