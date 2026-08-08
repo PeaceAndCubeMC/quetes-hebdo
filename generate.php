@@ -74,6 +74,7 @@ if (isset($_POST)) {
             break;
         case AdvancementTrigger::PLAYER_KILLED_ENTITY:
         case AdvancementTrigger::BRED_ANIMALS:
+        case AdvancementTrigger::SUMMONED_ENTITY:
         case AdvancementTrigger::TAME_ANIMAL:
             $value = $entity;
             break;
@@ -104,6 +105,7 @@ if (isset($_POST)) {
                 $criterion["conditions"]["potion"] = $value;
                 break;
             case AdvancementTrigger::PLAYER_KILLED_ENTITY:
+            case AdvancementTrigger::SUMMONED_ENTITY:
             case AdvancementTrigger::TAME_ANIMAL:
                 $criterion["conditions"]["entity"] = array(
                     "entity_type" => withMinecraftPrefix($value)

@@ -9,6 +9,7 @@ class AdvancementTrigger
     const ENCHANTED_ITEM = "minecraft:enchanted_item";
     const PLAYER_KILLED_ENTITY = "minecraft:player_killed_entity";
     const RECIPE_CRAFTED = "minecraft:recipe_crafted";
+    const SUMMONED_ENTITY = "minecraft:summoned_entity";
     const TAME_ANIMAL = "minecraft:tame_animal";
     const VILLAGER_TRADE = "minecraft:villager_trade";
     const VOLUNTARY_EXILE = "minecraft:voluntary_exile";

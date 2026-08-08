@@ -32,6 +32,7 @@ function showTargetDiv(value) {
             break;
         case "minecraft:player_killed_entity":
         case "minecraft:bred_animals":
+        case "minecraft:summoned_entity":
         case "minecraft:tame_animal":
             document.getElementById("target-entity").style.display = "block";
             break;

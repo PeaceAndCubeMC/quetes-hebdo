@@ -69,7 +69,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <option value="minecraft:recipe_crafted">Craft d'une recette</option>
                     <option value="minecraft:crafter_recipe_crafted">Craft d'une recette dans un fabricateur</option>
                     <option value="minecraft:brewed_potion">Craft d'une potion</option>
-                    <option value="minecraft:player_killed_entity">Kill d'une entité</option>
+                    <option value="minecraft:player_killed_entity">Entité tuée</option>
+                    <option value="minecraft:summoned_entity">Entité invoquée</option>
                     <option value="minecraft:bred_animals">Reproduction d'animaux</option>
                     <option value="minecraft:tame_animal">Animal apprivoisé</option>
                     <option value="minecraft:enchanted_item">Item enchanté</option>
