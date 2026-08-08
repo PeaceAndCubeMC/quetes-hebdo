@@ -100,21 +100,21 @@ if (isset($_POST)) {
             case "minecraft:player_killed_entity":
             case "minecraft:tame_animal":
                 $criterion["conditions"]["entity"] = array(
-                    "entity_type" => "minecraft:" . $value
+                    "entity_type" => withMinecraftPrefix($value)
                 );
                 break;
             case "minecraft:bred_animals":
                 $criterion["conditions"]["child"] = array(
-                    "entity_type" => "minecraft:" . $value
+                    "entity_type" => withMinecraftPrefix($value)
                 );
                 break;
             case "minecraft:enchanted_item":
             case "minecraft:consume_item":
             case "minecraft:villager_trade":
                 $criterion["conditions"]["item"] = array(
-                    "items" => array(
-                        "minecraft:" . $value
-                    )
+                    "items" => isTag($value)
+                        ? withMinecraftPrefix($value)
+                        : array(withMinecraftPrefix($value))
                 );
                 break;
             case "minecraft:voluntary_exile":
@@ -124,7 +124,9 @@ if (isset($_POST)) {
                         "entity" => "this",
                         "predicate" => array(
                             "location" => array(
-                                "biome" => "minecraft:" . $value
+                                "biomes" => isTag($value)
+                                    ? withMinecraftPrefix($value)
+                                    : array(withMinecraftPrefix($value))
                             )
                         )
                     )
@@ -158,7 +160,21 @@ if (isset($_POST)) {
     addQuest($advancementFileName, $trigger, $value, $amount);
 }
 
-function getAdvancementTitle($week, $year) {
+function isTag(string $value): bool
+{
+    return str_starts_with($value, "#");
+}
+
+function withMinecraftPrefix(string $value): string
+{
+    if (isTag($value)) {
+        return "#minecraft:" . substr($value, 1);
+    }
+    return "minecraft:" . $value;
+}
+
+function getAdvancementTitle($week, $year): string
+{
     $date = new DateTime();
     $date->setISODate($year, $week);
     $startDay = date("d", strtotime($date->format('Y-m-d') . " +6 day"));
@@ -168,7 +184,8 @@ function getAdvancementTitle($week, $year) {
     return ltrim($startDay, "0") . " " . translateMonthToFrench($startMonth) . " - " . ltrim($endDay, "0") . " " . translateMonthToFrench($endMonth);
 }
 
-function translateMonthToFrench($month) {
+function translateMonthToFrench($month): string
+{
     $map = array(
         "01" => "janvier",
         "02" => "février",
@@ -186,7 +203,8 @@ function translateMonthToFrench($month) {
     return $map[$month];
 }
 
-function addPlayerAdvancementCheck($advancementPath, $index) {
+function addPlayerAdvancementCheck($advancementPath, $index): array
+{
     return array(
         "type_specific/player" => array(
             "advancements" => array(

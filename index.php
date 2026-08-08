@@ -121,7 +121,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <label for="item">Item</label>
                 <select id="item" name="item" onchange="updateIconSelect('item')">
                     <?php
-                        $items = getItems();
+                        $items = getItems(true);
                         foreach ($items as $item) {
                             echo "<option value='" . $item . "'>" . $item . "</option>";
                         }
