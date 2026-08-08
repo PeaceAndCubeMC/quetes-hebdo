@@ -41,6 +41,7 @@ if (isset($_POST)) {
     $potion = $_POST["potion"];
     $entity = $_POST["entity"];
     $item = $_POST["item"];
+    $enchantment = $_POST["enchantment"];
     $biome = $_POST["biome"];
     $amount = $_POST["amount"];
 
@@ -77,6 +78,8 @@ if (isset($_POST)) {
             $value = $entity;
             break;
         case AdvancementTrigger::ENCHANTED_ITEM:
+            $value = $item . " - " . $enchantment;
+            break;
         case AdvancementTrigger::CONSUME_ITEM:
         case AdvancementTrigger::VILLAGER_TRADE:
             $value = $item;
@@ -112,6 +115,21 @@ if (isset($_POST)) {
                 );
                 break;
             case AdvancementTrigger::ENCHANTED_ITEM:
+                $criterion["conditions"]["item"] = array(
+                    "items" => isTag($item)
+                        ? withMinecraftPrefix($item)
+                        : array(withMinecraftPrefix($item))
+                );
+                if ($enchantment !== "*") {
+                    $criterion["conditions"]["item"]["predicates"] = array(
+                        "minecraft:enchantments" => array(
+                            array(
+                                "enchantments" => withMinecraftPrefix($enchantment)
+                            )
+                        )
+                    );
+                }
+                break;
             case AdvancementTrigger::CONSUME_ITEM:
             case AdvancementTrigger::VILLAGER_TRADE:
                 $criterion["conditions"]["item"] = array(

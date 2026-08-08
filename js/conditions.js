@@ -37,6 +37,7 @@ function showTargetDiv(value) {
             break;
         case "minecraft:enchanted_item":
             document.getElementById("target-item").style.display = "block";
+            document.getElementById("target-enchantment").style.display = "block";
             document.getElementById("note").innerHTML = "Note : Il s'agit de l'item après avoir été enchanté.";
             break;
         case "minecraft:consume_item":

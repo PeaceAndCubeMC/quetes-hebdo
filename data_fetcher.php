@@ -27,6 +27,11 @@ function getItems(bool $withTags = false): array
     return getData(RegistryType::ITEM);
 }
 
+function getEnchantments(): array
+{
+    return getElementsAndTags(RegistryType::ENCHANTMENT);
+}
+
 function getEntityTypes(): array
 {
     return getElementsAndTags(RegistryType::ENTITY_TYPE);

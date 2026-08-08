@@ -78,6 +78,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <option value="minecraft:voluntary_exile">Déclenchement d'un raid</option>
                 </select>
             </div>
+
             <div class="target" id="target-recipe">
                 <label for="recipe">Recette</label>
                 <select id="recipe" name="recipe" onchange="updateIconSelect('recipe')">
@@ -91,6 +92,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <input type="text" id="filter-recipe" placeholder="Filtre" onkeyup="filterElements('filter-recipe', 'recipe')">
                 <button id="random" type="button" onclick="chooseRandomly('recipe')">Choisir aléatoirement</button>
             </div>
+
             <div class="target" id="target-potion">
                 <label for="potion">Potion</label>
                 <select id="potion" name="potion">
@@ -104,6 +106,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <input type="text" id="filter-potion" placeholder="Filtre" onkeyup="filterElements('filter-potion', 'potion')">
                 <button id="random" type="button" onclick="chooseRandomly('potion')">Choisir aléatoirement</button>
             </div>
+
             <div class="target" id="target-entity">
                 <label for="entity">Entité</label>
                 <select id="entity" name="entity">
@@ -117,6 +120,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <input type="text" id="filter-entity" placeholder="Filtre" onkeyup="filterElements('filter-entity', 'entity')">
                 <button id="random" type="button" onclick="chooseRandomly('entity')">Choisir aléatoirement</button>
             </div>
+
             <div class="target" id="target-item">
                 <label for="item">Item</label>
                 <select id="item" name="item" onchange="updateIconSelect('item')">
@@ -129,6 +133,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 </select>
                 <input type="text" id="filter-item" placeholder="Filtre" onkeyup="filterElements('filter-item', 'item')">
                 <button id="random" type="button" onclick="chooseRandomly('item')">Choisir aléatoirement</button>
+            </div>
+
+            <div class="target" id="target-enchantment">
+                <label for="enchantment">Enchantement</label>
+                <select id="enchantment" name="enchantment">
+                    <?php
+                        echo "<option value='*'>*</option>";
+
+                        $enchantments = getEnchantments();
+                        foreach ($enchantments as $enchantment) {
+                            echo "<option value='" . $enchantment . "'>" . $enchantment . "</option>";
+                        }
+                    ?>
+                </select>
+                <input type="text" id="filter-enchantment" placeholder="Filtre" onkeyup="filterElements('filter-enchantment', 'enchantment')">
+                <button id="random" type="button" onclick="chooseRandomly('enchantment')">Choisir aléatoirement</button>
             </div>
 
             <div class="target" id="target-biome">
