@@ -6,3 +6,15 @@ th, td {
     display: flex;
     justify-content: space-between;
 }
+
+.section {
+    margin: 15px 10px;
+}
+
+.section legend {
+    font-weight: bold;
+}
+
+.section div {
+    margin-top: 5px;
+}

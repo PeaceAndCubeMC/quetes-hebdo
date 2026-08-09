@@ -33,7 +33,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <h2>Créer une quête</h2>
     <form action="generate.php" method="post">
 
-        <fieldset>
+        <fieldset class="section">
             <legend>Affichage</legend>
             <div>
                 <label for="week">Semaine</label>
@@ -61,7 +61,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </div>
         </fieldset>
 
-        <fieldset>
+        <fieldset class="section">
             <legend>Conditions</legend>
             <div>
                 <label for="trigger">Type de condition</label>
