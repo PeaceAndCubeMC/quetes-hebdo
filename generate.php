@@ -74,6 +74,8 @@ if (isset($_POST)) {
             $value = $potion;
             break;
         case AdvancementTrigger::PLAYER_KILLED_ENTITY:
+            $value = $entity . ($biome !== ANY ? " - " . $biome : "");
+            break;
         case AdvancementTrigger::BRED_ANIMALS:
         case AdvancementTrigger::SUMMONED_ENTITY:
         case AdvancementTrigger::TAME_ANIMAL:
@@ -100,21 +102,32 @@ if (isset($_POST)) {
         switch ($trigger) {
             case AdvancementTrigger::RECIPE_CRAFTED:
             case AdvancementTrigger::CRAFTER_RECIPE_CRAFTED:
-                $criterion["conditions"]["recipe_id"] = $value;
+                $criterion["conditions"]["recipe_id"] = $recipe;
                 break;
             case AdvancementTrigger::BREWED_POTION:
-                $criterion["conditions"]["potion"] = $value;
+                $criterion["conditions"]["potion"] = $potion;
                 break;
             case AdvancementTrigger::PLAYER_KILLED_ENTITY:
+                $criterion["conditions"]["entity"] = array(
+                    "entity_type" => withMinecraftPrefix($entity)
+                );
+                if ($biome !== ANY) {
+                    $criterion["conditions"]["entity"]["location"] = array(
+                        "biomes" => isTag($biome)
+                            ? withMinecraftPrefix($biome)
+                            : array(withMinecraftPrefix($biome))
+                    );
+                }
+                break;
             case AdvancementTrigger::SUMMONED_ENTITY:
             case AdvancementTrigger::TAME_ANIMAL:
                 $criterion["conditions"]["entity"] = array(
-                    "entity_type" => withMinecraftPrefix($value)
+                    "entity_type" => withMinecraftPrefix($entity)
                 );
                 break;
             case AdvancementTrigger::BRED_ANIMALS:
                 $criterion["conditions"]["child"] = array(
-                    "entity_type" => withMinecraftPrefix($value)
+                    "entity_type" => withMinecraftPrefix($entity)
                 );
                 break;
             case AdvancementTrigger::ENCHANTED_ITEM:
@@ -139,9 +152,9 @@ if (isset($_POST)) {
             case AdvancementTrigger::VILLAGER_TRADE:
                 if ($item !== ANY) {
                     $criterion["conditions"]["item"] = array(
-                        "items" => isTag($value)
-                            ? withMinecraftPrefix($value)
-                            : array(withMinecraftPrefix($value))
+                        "items" => isTag($item)
+                            ? withMinecraftPrefix($item)
+                            : array(withMinecraftPrefix($item))
                     );
                 }
                 break;
@@ -153,9 +166,9 @@ if (isset($_POST)) {
                             "entity" => "this",
                             "predicate" => array(
                                 "location" => array(
-                                    "biomes" => isTag($value)
-                                        ? withMinecraftPrefix($value)
-                                        : array(withMinecraftPrefix($value))
+                                    "biomes" => isTag($biome)
+                                        ? withMinecraftPrefix($biome)
+                                        : array(withMinecraftPrefix($biome))
                                 )
                             )
                         )

@@ -31,6 +31,9 @@ function showTargetDiv(value) {
             document.getElementById("target-potion").style.display = "block";
             break;
         case "minecraft:player_killed_entity":
+            document.getElementById("target-entity").style.display = "block";
+            document.getElementById("target-biome").style.display = "block";
+            break;
         case "minecraft:bred_animals":
         case "minecraft:summoned_entity":
         case "minecraft:tame_animal":
