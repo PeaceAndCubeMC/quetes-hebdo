@@ -14,6 +14,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 const MINECRAFT_PREFIX = "minecraft:";
+const ANY = "*";
 
 $rewardFunction = "peaceandcube:quetes/ticket";
 $advancementTemplate = array(
@@ -117,12 +118,14 @@ if (isset($_POST)) {
                 );
                 break;
             case AdvancementTrigger::ENCHANTED_ITEM:
-                $criterion["conditions"]["item"] = array(
-                    "items" => isTag($item)
-                        ? withMinecraftPrefix($item)
-                        : array(withMinecraftPrefix($item))
-                );
-                if ($enchantment !== "*") {
+                if ($item !== ANY) {
+                    $criterion["conditions"]["item"] = array(
+                        "items" => isTag($item)
+                            ? withMinecraftPrefix($item)
+                            : array(withMinecraftPrefix($item))
+                    );
+                }
+                if ($enchantment !== ANY) {
                     $criterion["conditions"]["item"]["predicates"] = array(
                         "minecraft:enchantments" => array(
                             array(
@@ -134,26 +137,30 @@ if (isset($_POST)) {
                 break;
             case AdvancementTrigger::CONSUME_ITEM:
             case AdvancementTrigger::VILLAGER_TRADE:
-                $criterion["conditions"]["item"] = array(
-                    "items" => isTag($value)
-                        ? withMinecraftPrefix($value)
-                        : array(withMinecraftPrefix($value))
-                );
+                if ($item !== ANY) {
+                    $criterion["conditions"]["item"] = array(
+                        "items" => isTag($value)
+                            ? withMinecraftPrefix($value)
+                            : array(withMinecraftPrefix($value))
+                    );
+                }
                 break;
             case AdvancementTrigger::VOLUNTARY_EXILE:
-                $criterion["conditions"]["player"] = [
-                    array(
-                        "condition" => "minecraft:entity_properties",
-                        "entity" => "this",
-                        "predicate" => array(
-                            "location" => array(
-                                "biomes" => isTag($value)
-                                    ? withMinecraftPrefix($value)
-                                    : array(withMinecraftPrefix($value))
+                if ($biome !== ANY) {
+                    $criterion["conditions"]["player"] = [
+                        array(
+                            "condition" => "minecraft:entity_properties",
+                            "entity" => "this",
+                            "predicate" => array(
+                                "location" => array(
+                                    "biomes" => isTag($value)
+                                        ? withMinecraftPrefix($value)
+                                        : array(withMinecraftPrefix($value))
+                                )
                             )
                         )
-                    )
-                ];
+                    ];
+                }
                 break;
         }
 

@@ -126,6 +126,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <label for="item">Item</label>
                 <select id="item" name="item" onchange="updateIconSelect('item')">
                     <?php
+                        echo "<option value='*'>*</option>";
+
                         $items = getItems(true);
                         foreach ($items as $item) {
                             echo "<option value='" . $item . "'>" . $item . "</option>";
@@ -156,6 +158,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <label for="biome">Biome</label>
                 <select id="biome" name="biome">
                     <?php
+                        echo "<option value='*'>*</option>";
+
                         $biomes = getBiomes();
                         foreach ($biomes as $biome) {
                             echo "<option value='" . $biome . "'>" . $biome . "</option>";

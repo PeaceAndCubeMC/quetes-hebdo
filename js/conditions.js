@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function hideTargetDivs() {
-    var targetDivs = document.getElementsByClassName("target");
-    for (var i = 0; i < targetDivs.length; i++) {
+    const targetDivs = document.getElementsByClassName("target");
+    for (let i = 0; i < targetDivs.length; i++) {
         targetDivs[i].style.display = "none";
     }
     document.getElementById("note").innerHTML = "";
@@ -52,20 +52,20 @@ function showTargetDiv(value) {
 }
 
 function filterElements(filterId, selectId) {
-    var filter = document.getElementById(filterId).value;
-    var select = document.getElementById(selectId);
+    const filter = document.getElementById(filterId).value;
+    const select = document.getElementById(selectId);
     // hide select options that don't match the filter
-    for (var i = 0; i < select.options.length; i++) {
-        if (select.options[i].text.toLowerCase().indexOf(filter.toLowerCase()) == -1) {
+    for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].text.toLowerCase().indexOf(filter.toLowerCase()) === -1) {
             select.options[i].style.display = "none";
         } else {
             select.options[i].style.display = "block";
         }
     }
     // if the selected option is hidden, select the first visible option
-    if (select.selectedIndex != -1 && select.options[select.selectedIndex].style.display == "none") {
-        for (var i = 0; i < select.options.length; i++) {
-            if (select.options[i].style.display == "block") {
+    if (select.selectedIndex !== -1 && select.options[select.selectedIndex].style.display === "none") {
+        for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].style.display === "block") {
                 select.selectedIndex = i;
                 break;
             }
@@ -74,12 +74,12 @@ function filterElements(filterId, selectId) {
 }
 
 function updateIconSelect(selectId) {
-    var select = document.getElementById(selectId);
-    var value = select.options[select.selectedIndex].value;
+    const select = document.getElementById(selectId);
+    const value = select.options[select.selectedIndex].value;
     if (value) {
-        var iconSelect = document.getElementById("icon");
-        for (var i = 0; i < iconSelect.options.length; i++) {
-            if (iconSelect.options[i].value == value) {
+        const iconSelect = document.getElementById("icon");
+        for (let i = 0; i < iconSelect.options.length; i++) {
+            if (iconSelect.options[i].value === value) {
                 iconSelect.selectedIndex = i;
                 break;
             }
@@ -88,7 +88,7 @@ function updateIconSelect(selectId) {
 }
 
 function chooseRandomly(selectId) {
-    var select = document.getElementById(selectId);
-    var item = select.options[Math.floor(Math.random() * select.options.length)];
+    const select = document.getElementById(selectId);
+    const item = select.options[Math.floor(Math.random() * select.options.length)];
     select.value = item.value;
 }
